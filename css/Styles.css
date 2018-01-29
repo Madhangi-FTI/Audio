@@ -62,6 +62,9 @@ td {
 	border-right: 1px solid #AAAAAA;
 	border-bottom: 1px solid #AAAAAA;
 }
+#tabs-transcript{
+	height:65%
+}
 
 #player-content{
 	padding: 5px 5px 5px 5px;
