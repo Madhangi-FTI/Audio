@@ -1,0 +1,279 @@
+﻿.jp-container {
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	position:relative;
+
+    /*
+    Box shadow is not needed in this app
+	-webkit-box-shadow:0px 0px 20px rgba(0,0,0,.3);
+	-moz-box-shadow:0px 0px 20px rgba(0,0,0,.3);
+	box-shadow:0px 0px 20px rgba(0,0,0,.3);
+    */
+	/* background:#000; 
+	   orig width was 570px */
+
+	overflow: auto;
+	/* margin: 10px auto; */
+	margin: 10px;
+	/* Optional: Could let the height be set automatically, but w/ current control positions
+	   there was a bit too much space. */
+	/* height: 40px; */
+}
+
+.jp-container .jp-jplayer {
+	top: 0;
+	left: 0;
+	position: fixed !important; position: relative; /* Rules for IE6 (full-screen) */
+	overflow: hidden;
+	z-index:1000;
+}
+
+.jp-container .jp-gui {
+        /* position was fixed */
+	position: relative !important; position: static; /* Rules for IE6 (full-screen) */
+	top: 0;
+	left: 0;
+	width:100%;
+	height:100%;
+	z-index:1000;
+}
+
+.jp-container.jp-interface {
+    position: relative;
+    width:100%;
+    height: 35px;
+ 
+    background-image: -webkit-linear-gradient(top, rgb(242, 242, 242), rgb(209, 209, 209));
+    background-image: -moz-linear-gradient(top, rgb(242, 242, 242), rgb(209, 209, 209));
+    background-image: -o-linear-gradient(top, rgb(242, 242, 242), rgb(209, 209, 209));
+    /* Inernet Explorer will use this one */
+    background-image: -ms-linear-gradient(top, rgb(242, 242, 242), rgb(209, 209, 209));
+    background-image: linear-gradient(top, rgb(242, 242, 242), rgb(209, 209, 209));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#f2f2f2', EndColorStr='#d1d1d1');
+ 
+    -webkit-box-shadow:
+        inset 0px 1px 0px #f7f7f7,
+        inset 0px -1px 0px #e2e2e2;
+    -moz-box-shadow:
+        inset 0px 1px 0px #f7f7f7,
+        inset 0px -1px 0px #e2e2e2;
+    box-shadow:
+        inset 0px 1px 0px #f7f7f7,
+        inset 0px -1px 0px #e2e2e2;
+}
+ 
+div.jp-controls-holder {
+    clear: both;
+    /* Orig. was 570px */
+    width: 100%;
+    margin: 0 auto;
+     
+    position: relative;
+    overflow: hidden;
+}
+
+/* Play, Pause */
+
+a.jp-play,
+a.jp-pause {
+    width:30px; /* was 40px */
+    height:35px;
+    float:left;
+    text-indent:-9999px;
+    outline:none;
+}
+ 
+a.jp-play {
+    background: url("../images/jplayer-sprite.png") 0 0 no-repeat;
+}
+ 
+a.jp-pause {
+    background: url("../images/jplayer-sprite.png") -40px 0 no-repeat;
+    display: none;
+}
+ 
+.separator {
+    background-image:url("../images/jplayer-separator.png");
+    background-repeat:no-repeat;
+    width: 2px;
+    height: 35px;
+    float:left;
+    margin-top: 7px;
+    margin-right: 2px;
+}
+
+/* Progress */
+
+.jp-progress {
+    background: #706d6d;
+ 
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+ 
+    -webkit-box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+    -moz-box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+    box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+ 
+    /* orig. was 280px */
+    width:90px;
+    height:10px;
+    float:left;
+    margin-top: 13px;
+}
+ 
+.jp-seek-bar {
+    width:0px;
+    height:100%;
+    cursor: pointer;
+}
+ 
+.jp-seeking-bg {
+    background:#575555;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+ 
+.jp-play-bar {
+    background: url("../images/jplayer-play-bar.png") left repeat-x;
+    width:0px;
+    height:10px;
+    position:relative;
+    z-index: 9999;
+     
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+ 
+.jp-play-bar span {
+    position:absolute;
+    top: -3px;
+    right: -12px;
+ 
+    /* The refresh of this was looking weird. Not needed,
+       so didn't both debugging.
+    background:url("../images/handle.png") no-repeat center; 
+    */
+    width: 16px;
+    height: 17px;
+}
+
+/* Current Time / Duration */
+
+.jp-current-time, .jp-duration {
+    font-size:11px;
+    font-family:Arial;
+    color:#444444;
+    margin-top: 12px;
+    margin-left: 2px;
+    float:left;
+}
+
+.jp-current-time {
+    float: left;
+    display:inline;
+}
+.jp-duration {
+    float: left;
+    display:inline;
+    text-align: right;
+}
+.jp-current-time {
+    margin-left:5px;
+}
+.jp-duration {
+    margin-right:5px;
+}
+.time-sep {
+    float:left;
+    margin: 13px 3px 0 3px;
+ 
+    font-size:11px;
+    font-family:Arial;
+    color:#444444;
+}
+
+/* Volume Buttons and Bar */
+
+.jp-video a.jp-mute,
+.jp-video a.jp-unmute {
+    /* text-indent:-9999px; */
+    float:left;
+    width: 35px; 
+    height: 35px;
+    outline:none;
+}
+ 
+.jp-mute {
+    float:left;
+    /* Orig. was 80px, but was too much padding */
+    background: url("../images/jplayer-sprite.png") -88px 0 no-repeat;
+    margin-top: 1px;
+    /* margin-left: -10px; */
+    /* Need to set margin-left b/c unmute icon is 3px shorter and don't want 
+       icon to move on mute/unmute */
+    margin-left: 3px;
+    width: 25px;
+    height: 35px;
+}
+ 
+.jp-unmute {
+    float:left;
+    /* Orig. was 115px, but was too much padding. Decreased by 8px to match jp-mute above. */
+    background: url("../images/jplayer-sprite.png") -123px 0 no-repeat;
+    margin-top: 1px;
+    /* margin-left: -13px; */
+    display: none;
+    width: 28px;
+    height: 35px;
+}
+ 
+.jp-volume-bar {
+    float:left;
+    margin-top: 13px;
+    margin-right: 10px;
+    overflow:hidden;
+    width:35px;
+    height:10px;
+    cursor: pointer;
+ 
+    background: #706d6d;
+ 
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+ 
+    -webkit-box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+    -moz-box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+    box-shadow:
+        inset 0px 1px 4px rgba(0,0,0,.4),
+        0px 1px 0px rgba(255,255,255,.4);
+}
+ 
+.jp-volume-bar-value {
+    background: transparent;
+    width:0px;
+    height:10px;
+    position: relative;
+}
+ 
+.jp-volume-bar-value span {
+    position:absolute;
+    top: 0px;
+    right: 0px;
+ 
+    background:url("../images/jplayer-volume.png") no-repeat center;
+    width: 11px;
+    height: 10px;
+}
