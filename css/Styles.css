@@ -63,7 +63,8 @@ td {
 	border-bottom: 1px solid #AAAAAA;
 }
 #tabs-transcript{
-	height:65%
+	height:65%;
+	display: block;
 }
 
 #player-content{
