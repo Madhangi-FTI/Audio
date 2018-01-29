@@ -52,7 +52,7 @@ td {
 .cstar-content {
     overflow: auto;
 	display: block;
-	height:65%;
+	height:75%;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -63,7 +63,7 @@ td {
 	border-bottom: 1px solid #AAAAAA;
 }
 #tabs-transcript{
-	height:65%;
+	height:75%;
 	display: block;
 }
 
