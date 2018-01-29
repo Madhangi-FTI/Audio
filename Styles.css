@@ -1,0 +1,94 @@
+.hiddenData {
+    display: none;
+}
+
+h1{
+	color:      #ffffff;
+	background: #999999;
+}
+
+h1{
+	color:      #ffffff;
+	background: #999999;
+	display: block;
+	cursor: pointer;
+	position: relative;
+	margin: 1px 0 0 0;
+	padding: .25em .25em .25em .7em;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	font-weight: bold;
+}
+
+body {
+	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	overflow: hidden;
+}
+
+tr:nth-child(even) {
+    background-color: #FFFFFF;
+    color: #0066FF;
+}
+
+tr:nth-child(odd) {
+    background-color: #F1F1F1;
+    color: #0066FF;
+}
+
+td {
+	font-family: Tahoma, Arial, Sans-Serif, Serif; 
+	font-size: 15px;
+	font-weight: normal;
+    padding: 2px;
+}
+
+.cstar-content {
+    overflow: auto;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-top: 1px solid #AAAAAA;
+	border-left: 1px solid #AAAAAA;
+	border-right: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+#player-content{
+	padding: 5px 5px 5px 5px;
+	height: 75px;
+}
+
+#transcript-content{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+#status-content{
+	height: 100px;
+}
+
+.hiLite {
+	text-decoration: underline;
+	background-color: yellow;
+	font-weight: bolder;
+}
+
+.verified {
+    background-color: #CCFFCC;
+}
+
+.redacted {
+    text-decoration: line-through;
+    color: red;
+}
+
+.ui-menu { position: absolute; width: 100px; }
+
+.redactionSet { font-size: 75%; }
