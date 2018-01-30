@@ -43,7 +43,7 @@ Element.prototype.HiLiteTranscript = function ( locId) {
         var overTop = element.offsetTop - tranDiv.scrollTop >= tranHeight - 6 /*padding...*/,
             overBottom = (tranDiv.scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
         
-	    if (((element.offsetTop - element.clientHeight + 20) > (tranHeight + tranDiv.children[0].scrollTop)-20) ) {
+	    if (((element.offsetTop - element.clientHeight + 30) > (tranHeight + tranDiv.children[0].scrollTop)-30) ) {
 	        element.scrollIntoView( true); 
         	//tranDiv.scrollTop = tranHeight-10;
 		//window.scroll(element.offsetLeft, element.offsetTop);
