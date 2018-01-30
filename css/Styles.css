@@ -51,8 +51,9 @@ td {
 
 .cstar-content {
     overflow: auto;
-	display: block;
-	height:70%;
+	display:block;
+
+	height:100% !important;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -62,9 +63,12 @@ td {
 	border-right: 1px solid #AAAAAA;
 	border-bottom: 1px solid #AAAAAA;
 }
-#tabs-transcript{
-	height:70%;
-	display: block;
+#tabs-b{
+	height:80%;
+	
+	overflow: auto;
+	position:absolute;
+	
 }
 
 #player-content{
