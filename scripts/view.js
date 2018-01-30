@@ -43,7 +43,12 @@ Element.prototype.HiLiteTranscript = function ( locId) {
         var overTop = element.offsetTop - tranDiv.scrollTop >= tranHeight - 6 /*padding...*/,
             overBottom = (tranDiv.scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
         
-        if (overTop || overBottom) element.scrollIntoView( true); 
+	    if (((element.offsetTop - element.clientHeight + 20) > (tranHeight + tranDiv.children[0].scrollTop)-20) ) {
+	        element.scrollIntoView( true); 
+        	//tranDiv.scrollTop = tranHeight-10;
+		//window.scroll(element.offsetLeft, element.offsetTop);
+	   }
+       // if (overTop || overBottom) element.scrollIntoView( true); 
         curElement = element;
     }
     return false;
@@ -54,12 +59,15 @@ function organizeDisplay() {
     $("#tabs-b" ).tabs();
     
     document.body.style.overflow = "hidden";
-    tranDiv = $("#tabs-transcript")[0],
+    tranDiv = $("#transcript-content")[0],
     tranStyle = window.getComputedStyle( tranDiv, null),
     tranBorder = parseInt(tranStyle.getPropertyValue('border-top-width')),
     tranOffset = tranDiv.offsetTop,
-    tranHeight =  $(window).height() - tranDiv.offsetTop - 10;
-    $("#tabs-transcript").height( tranHeight);
+    tranHeight;
+    // $("#tabs-b").height('70%');
+    //tranHeight =  $(window).height() - tranDiv.offsetTop - 10;
+	//var tranHeight =  $("#tabs-b").height() - 10;
+    //$("#tabs-transcript").height( tranHeight);
     document.body.style.overflow = "";
     $("#tabs-a").tabs("option", "active", 1);
 }
@@ -296,6 +304,7 @@ function playAudio(time) {
 }
 
 function highlightCurrent( curTime) {
+    tranHeight = $("#tabs-b").height();
     $.each(window.loc, function (key, loc) {
         if (curTime < loc.startTime) return false;
         if (curTime >= loc.startTime && curTime <= loc.startTime + loc.duration)
