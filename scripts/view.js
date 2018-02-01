@@ -28,25 +28,27 @@ function formatTimeForDisplay(time) {
     return result;
 }
 
-Element.prototype.HiLiteTranscript = function (locId) {
-    curHiLiteId.removeClass("hiLite");
+
+Element.prototype.HiLiteTranscript = function ( locId) {
+    curHiLiteId.removeClass( "hiLite");
     $(this).addClass("hiLite");
     curHiLiteId = $(this);
-
+    
     var element = this.parentNode.parentNode;
-    if (element != curElement) {
+    if (element != curElement)
+    {
         var overTop = element.offsetTop - tranDiv.scrollTop >= tranHeight - 6 /*padding...*/,
-            overBottom = (tranDiv.children[0].scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
+            overBottom = (tranDiv.scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
+        
+	    if (((element.offsetTop + (element.clientHeight + 20)) > (tranHeight + tranDiv.children[0].scrollTop)-20) ) {
+	        element.scrollIntoView( true); 
 
-        if (((element.offsetTop - element.clientHeight + 20) > (tranDiv.children[0].clientHeight + tranDiv.children[0].scrollTop)-20) || element.offsetWidth < tranDiv.children[0].scrollWidth) {
-            //element.scrollIntoView(true);
-            $(tranDiv.children[0]).scrollTop(element.offsetTop);
-        }
+	   }
+       // if (overTop || overBottom) element.scrollIntoView( true); 
         curElement = element;
     }
     return false;
 }
-
 function organizeDisplay() {
     $("#tabs-a").tabs();
     $("#tabs-b").tabs();
@@ -56,8 +58,9 @@ function organizeDisplay() {
     tranStyle = window.getComputedStyle(tranDiv, null),
     tranBorder = parseInt(tranStyle.getPropertyValue('border-top-width')),
     tranOffset = tranDiv.offsetTop,
-    tranHeight = $(window).height() - tranDiv.offsetTop - 10;
-    $("#tabs-transcript").height(tranHeight);
+    //tranHeight = $(window).height() - tranDiv.offsetTop - 10;
+    tranHeight;
+    //$("#tabs-transcript").height(tranHeight);
     document.body.style.overflow = "";
     $("#tabs-a").tabs("option", "active", 1);
 
@@ -331,6 +334,7 @@ function playAudio(time) {
 }
 
 function highlightCurrent(curTime) {
+    tranHeight = $("#tabs-b").height();
     $.each(window.loc, function (key, loc) {
         if (curTime < loc.startTime) return false;
         if (curTime >= loc.startTime && curTime <= loc.startTime + loc.duration)
