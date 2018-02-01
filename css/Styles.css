@@ -23,12 +23,16 @@ h1{
 	border-top-left-radius: 2px;
 	font-weight: bold;
 }
-
+html{
+	height: 100%;
+}
 body {
 	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
 	font-size: 13px;
 	font-weight: normal;
 	overflow: hidden;
+	height: 100%;
+	
 }
 
 #ccTable tr:nth-child(even) {
@@ -50,10 +54,10 @@ td {
 }
 
 .cstar-content {
-    overflow: auto;
+        overflow: auto;
 	display:block;
 
-	height:100% !important;
+	height:100% ;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -63,14 +67,50 @@ td {
 	border-right: 1px solid #AAAAAA;
 	border-bottom: 1px solid #AAAAAA;
 }
+.cstar-redaction-content {
+        overflow: scroll;
+	display:block;
+	height:100%;
+
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-top: 1px solid #AAAAAA;
+	border-left: 1px solid #AAAAAA;
+	border-right: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+.cstar-correction-content {
+    	overflow: auto;
+	display:block;
+	height:100%;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-top: 1px solid #AAAAAA;
+	border-left: 1px solid #AAAAAA;
+	border-right: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+#tabs-redcation{
+	height:100px !important;
+	overflow: auto;
+	
+}
+#tabs-correction{
+	height:100px !important;
+	overflow: auto;
+	
+}
 #tabs-b{
 	height:78%;
-	
+	max-height: 80%;
 	overflow: auto;
 	position:absolute;
 	
 }
-
 #player-content{
 	padding: 5px 5px 5px 5px;
 	height: 75px;
