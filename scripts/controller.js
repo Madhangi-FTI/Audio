@@ -13,8 +13,7 @@ function doWork() {
         organizeDisplay();
     }
     catch (err) {
-        alert("Error occured - " + err.message);
-        alert(err.stack);
+         alert("Error occured - " + err.message);
     }
 }
 
@@ -41,9 +40,8 @@ function getIndexInfo() {
 // ---------------------------------   CAPTIONS --------------------------------- 
 
 function formatDualCaptions(capA, capB) {
-    var utt;
     try {
-        utt = [];
+        var utt = [];
         var utt1 = null, utt2 = null;
         while (capA.utterances.length > 0 || capB.utterances.length > 0 || utt1 != null || utt2 != null) {
             if (utt1 == null && capA.utterances.length > 0) {
@@ -73,9 +71,8 @@ function formatDualCaptions(capA, capB) {
 }
 
 function formatMonoCaption(capA) {
-    var utt;
     try {
-        utt = [];
+        var utt = [];
         var utt1;
         while (capA.utterances.length > 0) {
             utt1 = capA.utterances.shift();
@@ -91,8 +88,9 @@ function formatMonoCaption(capA) {
 
 function loadCaptionsStep() {
     if (window.bbnIsMono) {
-        getAjaxData(getCaptionsPromise, "Gather single sided transcripts", "",
-            function (data) { formatCaptionsStep(data); }, ""
+        getAjaxData(getCaptionsPromise(""), "Gather single sided transcripts", "",
+            function (data) { formatCaptionsStep(data); },
+            ""
         );
     }
     else {
@@ -103,10 +101,9 @@ function loadCaptionsStep() {
 }
 
 function formatCaptionsStep(capA, capB) {
-    var utt;
     if (window.bbnIsMono) {
         showStatus( "Format single sided audio");
-        utt = formatMonoCaption( capA);
+        var utt = formatMonoCaption( capA);
         showStatus("Success: Format single sided audio");
     } else {
         showStatus("Format multi sided audio");
@@ -171,7 +168,7 @@ function getAudioStep() {
 
 function addRedactionSet() {
     var newSet = prompt("Enter New Redaction Set", "Enter Here...");
-    if (newSet === "" || newSet == null) {
+    if (newSet == "" || newSet == null) {
         alert("The Redaction Set cannot be empty or null!");
     }
     if ($.inArray(window.redactionSets, newSet) >= 0) {

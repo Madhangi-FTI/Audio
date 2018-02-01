@@ -13,13 +13,9 @@ function SetupEventHandlers() {
 
     setupWindowScroll();
     setupRedactionSetButtons();
-
-    $('body').on('dblclick', '#ccTable tbody tr', function () {
-        playAudio( $(this).attr('sTime'));
-    });
 }
 
-function formatTimeForDisplay (time) {
+function formatTimeForDisplay(time) {
 
     var totalSec = new Date(parseInt(time) * 1000) / 1000;
     var hours = parseInt(totalSec / 3600) % 24;
@@ -32,44 +28,46 @@ function formatTimeForDisplay (time) {
     return result;
 }
 
-Element.prototype.HiLiteTranscript = function ( locId) {
-    curHiLiteId.removeClass( "hiLite");
+Element.prototype.HiLiteTranscript = function (locId) {
+    curHiLiteId.removeClass("hiLite");
     $(this).addClass("hiLite");
     curHiLiteId = $(this);
-    
+
     var element = this.parentNode.parentNode;
-    if (element != curElement)
-    {
+    if (element != curElement) {
         var overTop = element.offsetTop - tranDiv.scrollTop >= tranHeight - 6 /*padding...*/,
-            overBottom = (tranDiv.scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
-        
-	    if (((element.offsetTop - element.clientHeight + 40) > (tranHeight + tranDiv.children[0].scrollTop)-40) ) {
-	        element.scrollIntoView( true); 
-        	//tranDiv.scrollTop = tranHeight-10;
-		//window.scroll(element.offsetLeft, element.offsetTop);
-	   }
-       // if (overTop || overBottom) element.scrollIntoView( true); 
+            overBottom = (tranDiv.children[0].scrollTop - tranHeight) > (element.offsetTop - (tranHeight - element.offsetTop - element.clientHeight));
+
+        if (((element.offsetTop - element.clientHeight + 20) > (tranDiv.children[0].clientHeight + tranDiv.children[0].scrollTop)-20) || element.offsetWidth < tranDiv.children[0].scrollWidth) {
+            //element.scrollIntoView(true);
+            $(tranDiv.children[0]).scrollTop(element.offsetTop);
+        }
         curElement = element;
     }
     return false;
 }
 
 function organizeDisplay() {
-    $("#tabs-a" ).tabs();
-    $("#tabs-b" ).tabs();
-    
+    $("#tabs-a").tabs();
+    $("#tabs-b").tabs();
+
     document.body.style.overflow = "hidden";
-    tranDiv = $("#transcript-content")[0],
-    tranStyle = window.getComputedStyle( tranDiv, null),
+    tranDiv = $("#tabs-transcript")[0],
+    tranStyle = window.getComputedStyle(tranDiv, null),
     tranBorder = parseInt(tranStyle.getPropertyValue('border-top-width')),
     tranOffset = tranDiv.offsetTop,
-    tranHeight;
-    // $("#tabs-b").height('70%');
-    //tranHeight =  $(window).height() - tranDiv.offsetTop - 10;
-	//var tranHeight =  $("#tabs-b").height() - 10;
-    //$("#tabs-transcript").height( tranHeight);
+    tranHeight = $(window).height() - tranDiv.offsetTop - 10;
+    $("#tabs-transcript").height(tranHeight);
     document.body.style.overflow = "";
     $("#tabs-a").tabs("option", "active", 1);
+
+    $(tranDiv).on('dblclick', '#ccTable tbody tr', function () {
+        if ($(this.children[1]).find('span.editable input').length > 0) {
+            $("#jp_player").jPlayer("pause", $("#jp_player").data("jPlayer").status.currentTime);
+            return;
+        }
+        playAudio(parseInt($(this).attr('sTime')));
+    });
 }
 
 function renderCaptions(utterances) {
@@ -77,13 +75,13 @@ function renderCaptions(utterances) {
 
     $.each(utterances, function (uttIndex, utterance) {
         var out = '<tr sTime="' + utterance.startTime + '"><td><b>' + formatTimeForDisplay(utterance.startTime) + ':</b></td><td>';
-        $.each( utterance.tokens, function( tokIndex, token ) {
+        $.each(utterance.tokens, function (tokIndex, token) {
 
             var tokenLabel = normalize(token, tokIndex);
 
             var locId = ("000000" + index).slice(-6);
-            window.loc[ index++] = { "startTime":token.startTime, "duration": token.duration, "locId": locId};
-            
+            window.loc[index++] = { "startTime": token.startTime, "duration": token.duration, "locId": locId };
+
             out += '<span id="' + locId + '"' + getStyles(token) + '>' + tokenLabel + '</span> ';
             renderCorrections(token, tokenLabel);
         });
@@ -91,14 +89,14 @@ function renderCaptions(utterances) {
         ccTable.append(out);
     });
 
-    $("#addNewRSet").click(function(e) {
+    $("#addNewRSet").click(function (e) {
         addRedactionSet();
     });
 
     $(".editable").click(function (e) {
         var eid = $(this).attr('id');
         selectText = $(this).text();
-        $("#" + eid).editable("click", function(ie) {
+        $("#" + eid).editable("click", function (ie) {
             if (selectText != ie.value) {
                 var vs = parseInt(eid);
                 var start = window.loc[vs].startTime;
@@ -112,12 +110,11 @@ function renderCaptions(utterances) {
             }
         });
     })
-    .mouseup( function (e) {
+    .mouseup(function (e) {
         if (selectStart != "") selectEnd = $(this).attr('id');
         else selectEnd = "";
     })
-    .mousedown(function (e)
-    {
+    .mousedown(function (e) {
         selectStart = $(this).attr('id');
         selectEnd = "";
     });
@@ -159,32 +156,37 @@ function renderCorrections(token, tokenLabel) {
     }
 }
 
-function renderRedactions() {
+
+
+function renderRedactions_old() {
     try {
-        var table = redTable.DataTable();
+        var found = false;
+        $.each(window.redactions, function (index, redaction) {
+            var out = '<tr>';
+            out += '<td>' + formatTimeForDisplay(redaction.startTime) + '</td>';
+            out += '<td>' + formatTimeForDisplay(redaction.endTime) + '</td>';
+            out += '<td>' + redaction.redactionSet + '</td>';
+            out += '<td><a href="#removeRedaction" id="Redact' + index + '" text-align="center"><img alt="remove" src="images/trash.png"></a></td>';
+            out += '</tr>';
 
-        $.each(window.redactions, function(index, redaction) {
-            var s = formatTimeForDisplay(redaction.startTime);
-            var e = formatTimeForDisplay(redaction.endTime);
-            var r = redaction.redactionSet;
-            var d = '<a href="#removeRedaction" id="Redact' + index + '" text-align="center">' +
-                    '<img alt="remove" src="images/trash.png"></a>';
-            table.row.add([s, e, r, d]).draw();
+            redTable.append(out);
+            found = true;
         });
 
-        $('a[href="#removeRedaction"]').click(function () {
-            var redactId = $(this).attr('id').replace('Redact', '');
-            removeRedaction(window.redactions[redactId]);
-        });
+        if (found)
+            $('a[href="#removeRedaction"]').click(function () {
+                var redactId = $(this).attr('id').replace('Redact', '');
+                removeRedaction(window.redactions[redactId]);
+            });
 
     } catch (err) {
         showRedactionError("Rendering Redactions", err.message);
     }
 }
 
-function renderRedactionSets( redactionSets) {
+function renderRedactionSets(redactionSets) {
     try {
-        $.each( redactionSets, function (index, redactionSet) {
+        $.each(redactionSets, function (index, redactionSet) {
             addRedactionSetDropDown(redactionSet);
         });
 
@@ -203,6 +205,7 @@ function renderRedactionSets( redactionSets) {
         showRedactionError("Rendering Redaction Sets", err.message);
     }
 }
+
 
 function redactVerify() {
     if (selectStart != "" && selectEnd != "") {
@@ -260,18 +263,45 @@ function handleError(err, funDesc, showAt) {
         showRedactionError("Rendering Redactions", errText);
     }
 }
-
-function renderCorrection( startTime, duration, correctedWord) {
+function renderRedactions() {
     try {
-        var endTime = startTime + duration;
-        var out = '<tr>';
-        out += '<td>' + formatTimeForDisplay(startTime) + '</td>';
-        out += '<td>' + formatTimeForDisplay(endTime) + '</td>';
-        out += '<td>' + duration.toFixed(2) + '</td>';
-        out += '<td>' + correctedWord + '</td>';
-        out += '</tr>';
-        fixTable.append(out);
+        var table = redTable.DataTable();
 
+        $.each(window.redactions, function (index, redaction) {
+            var s = formatTimeForDisplay(redaction.startTime);
+            var e = formatTimeForDisplay(redaction.endTime);
+            var r = redaction.redactionSet;
+            var d = '<a href="#removeRedaction" id="Redact' + index + '" text-align="center">' +
+                    '<img alt="remove" src="images/trash.png"></a>';
+            table.row.add([s, e, r, d]).draw();
+        });
+
+        $('a[href="#removeRedaction"]').click(function () {
+            var redactId = $(this).attr('id').replace('Redact', '');
+            removeRedaction(window.redactions[redactId]);
+        });
+
+    } catch (err) {
+        showRedactionError("Rendering Redactions", err.message);
+    }
+}
+
+function renderCorrection(startTime, duration, correctedWord) {
+    try {
+        var table = fixTable.DataTable();
+        var endTime = startTime + duration;
+        //var out = '<tr>';
+        //out += '<td>' + formatTimeForDisplay(startTime) + '</td>';
+        //out += '<td>' + formatTimeForDisplay(endTime) + '</td>';
+        //out += '<td>' + duration.toFixed(2) + '</td>';
+        //out += '<td>' + correctedWord + '</td>';
+        //out += '</tr>';
+        //fixTable.append(out);
+        var s = formatTimeForDisplay(startTime);
+        var e = formatTimeForDisplay(endTime);
+        var r = duration.toFixed(2);
+        var d = correctedWord;
+        table.row.add([s, e, r, d]).draw();
     } catch (err) {
         showRedactionError("Rendering Redactions", err.message);
     }
@@ -283,7 +313,7 @@ function setupJPlayer() {
             var time = event.jPlayer.status.currentTime;
             player.jPlayer('mute', isMuted(time));
             highlightCurrent(time);
-        }, 
+        },
         supplied: "m4a",
         wmode: "window",
         smoothPlayBar: true,
@@ -293,18 +323,14 @@ function setupJPlayer() {
     });
 
     var url = getAudioUrl();
-    player.jPlayer("setMedia", {m4a: url});
+    player.jPlayer("setMedia", { m4a: url });
 }
 
 function playAudio(time) {
-    player.jPlayer('pause');
-    alert("playing from " + time);
     player.jPlayer('play', time);
-    alert("Am I? playing from " + time);
 }
 
-function highlightCurrent( curTime) {
-    tranHeight = $("#tabs-b").height();
+function highlightCurrent(curTime) {
     $.each(window.loc, function (key, loc) {
         if (curTime < loc.startTime) return false;
         if (curTime >= loc.startTime && curTime <= loc.startTime + loc.duration)
@@ -323,6 +349,7 @@ function isMuted(curTime) {
                 muted = true;
                 return false;
             }
+            
             return true;
         });
     }
