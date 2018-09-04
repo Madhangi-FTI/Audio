@@ -17,15 +17,11 @@ h1{
 	border-top-left-radius: 2px;
 	font-weight: bold;
 }
-html{
-	height: 100%;
-}
 body {
-	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial;
+	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
 	font-size: 10px;
 	font-weight: normal;
 	overflow: hidden;
-	height: 100%;
 }
 #ccTable tr:nth-child(even) {
     background-color: #FFFFFF;
@@ -36,17 +32,13 @@ body {
 	color: #0066FF;
 }
 td {
-	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial;
-	font-size: 10px;
+	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
+	font-size: 9px;
 	font-weight: normal;
-	padding: 2px;
+    padding: 2px;
 }
-
 .cstar-content {
-        overflow: auto;
-	display:block;
-
-	height:100% ;
+    overflow: auto;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -55,76 +47,29 @@ td {
 	border-left: 1px solid #AAAAAA;
 	border-right: 1px solid #AAAAAA;
 	border-bottom: 1px solid #AAAAAA;
-}
-.cstar-redaction-content {
-        overflow: scroll;
-	display:block;
-	height:100%;
-
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 2px;
-	border-top: 1px solid #AAAAAA;
-	border-left: 1px solid #AAAAAA;
-	border-right: 1px solid #AAAAAA;
-	border-bottom: 1px solid #AAAAAA;
-}
-.cstar-correction-content {
-    	overflow: auto;
-	display:block;
-	height:100%;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 2px;
-	border-top: 1px solid #AAAAAA;
-	border-left: 1px solid #AAAAAA;
-	border-right: 1px solid #AAAAAA;
-	border-bottom: 1px solid #AAAAAA;
-}
-#tabs-redcation{
-	height:100px !important;
-	overflow: auto;
-	
-}
-
-#tabs-correction{
-	height:100px !important;
-	overflow: auto; 
-}
-
-#tabs-b{
-	height:71%;
-	max-height: 75%;
-	overflow: auto;
-	position:absolute;
-	
 }
 #player-content{
 	padding: 5px 5px 5px 5px;
-	height: 100px;
+	height: 75px;
 }
-
+#transcript-content{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
 #status-content{
 	height: 100px;
 }
-
 .hiLite {
 	text-decoration: underline;
 	background-color: yellow;
 	font-weight: bolder;
 }
-
 .verified {
     background-color: #CCFFCC;
 }
-
 .redacted {
     text-decoration: line-through;
     color: red;
 }
-
 .ui-menu { position: absolute; width: 100px; }
-
 .redactionSet { font-size: 75%; }
