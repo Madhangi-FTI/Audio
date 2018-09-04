@@ -1,12 +1,6 @@
 .hiddenData {
     display: none;
 }
-
-h1{
-	color:      #ffffff;
-	background: #999999;
-}
-
 h1{
 	color:      #ffffff;
 	background: #999999;
@@ -32,25 +26,20 @@ body {
 	font-weight: normal;
 	overflow: hidden;
 	height: 100%;
-	
 }
-
 #ccTable tr:nth-child(even) {
     background-color: #FFFFFF;
 	color: #0066FF;
 }
-
 #ccTable tr:nth-child(odd) {
     background-color: #F1F1F1;
 	color: #0066FF;
 }
-
-
 td {
 	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial;
 	font-size: 10px;
 	font-weight: normal;
-    padding: 2px;
+	padding: 2px;
 }
 
 .cstar-content {
@@ -99,11 +88,12 @@ td {
 	overflow: auto;
 	
 }
+
 #tabs-correction{
 	height:100px !important;
-	overflow: auto;
-	
+	overflow: auto; 
 }
+
 #tabs-b{
 	height:71%;
 	max-height: 75%;
@@ -115,8 +105,6 @@ td {
 	padding: 5px 5px 5px 5px;
 	height: 100px;
 }
-
-
 
 #status-content{
 	height: 100px;
