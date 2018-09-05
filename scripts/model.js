@@ -1,6 +1,6 @@
 function getAjaxData(promise, funDesc, showAt, successFun, params) {
     showStatus(funDesc + " ...");
-    var runPromise = params == "" ? promise : promise( params);
+    var runPromise = promise( params); //params == "" ? promise : promise( params);
     $.when(runPromise).then(function (data) {
         showStatus("Success : " + funDesc);
         successFun(data);
