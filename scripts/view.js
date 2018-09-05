@@ -16,7 +16,6 @@ function SetupEventHandlers() {
 }
 
 function formatTimeForDisplay(time) {
-
     var totalSec = new Date(parseInt(time) * 1000) / 1000;
     var hours = parseInt(totalSec / 3600) % 24;
     var minutes = parseInt(totalSec / 60) % 60;
@@ -272,7 +271,7 @@ function renderRedactions() {
             var e = formatTimeForDisplay(redaction.endTime);
             var r = redaction.redactionSet;
             var d = '<a href="#removeRedaction" id="Redact' + index + '" text-align="center">' +
-                    '<img alt="remove" src="https://raw.githubusercontent.com/Madhangi-FTI/Audio/master/images/trash.png"></a>';
+                    '<img alt="remove" src="https://rawgit.com/Madhangi-FTI/Audio/master/images/trash.png"></a>';
             table.row.add([s, e, r, d]).draw();
         });
 
