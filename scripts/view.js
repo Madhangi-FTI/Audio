@@ -169,7 +169,7 @@ function renderRedactions_old() {
             out += '<td>' + formatTimeForDisplay(redaction.startTime) + '</td>';
             out += '<td>' + formatTimeForDisplay(redaction.endTime) + '</td>';
             out += '<td>' + redaction.redactionSet + '</td>';
-            out += '<td><a href="#removeRedaction" id="Redact' + index + '" text-align="center"><img alt="remove" src="images/trash.png"></a></td>';
+            out += '<td><a href="#removeRedaction" id="Redact' + index + '" text-align="center"><img alt="remove" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACNUlEQVR42rXTy08TURQG8G9maHhYpsDYh4VQUKSmkOBCW0hcFNIZaJEFJMjGjcSV8d8xbkw0bjAxLjQ0mKLSQktbqlao9IHYB9ZFH6GlBSq0zTh1awdNjGdxN/fmd893ci+BfyzivwEzt+ak35PJbpIkUa1WSxvu9dgfganpmaZMKmWi29oM5XJ5YG52dvrw6AiJeCwe2/u2mEmlIwQBm8fl3KkLXDcMj9y9d9/R09sroWkatEyGUukY+fwBjgTosFjEo4cPrCvLtpt1Af3wiG5w6Kq3lZZJKUkDKJL6dULophYDP0oleJxrjwOf/POiMzCOjto0vRdZuVKFxkYJYtE4WqRSFPJ5NDY14UskfEOI4BIFuPFxq5HjLAODQ1ApFPjg96OG7YSCyKTT8HndepfD7hMFWI6zjnETFq1uABpNNz4Hg2jvYBAKBJDNZrG+ate7Vh3iACcARpa1XNbqBECDUCSC8wolglubSGfScK6807uda+KAiWWFDsYtff1X0NnVhVA4AoZhsBMOYT+3j7evl/TvvR5xYMJstprMZoum5xLkwgy2t4UITAeSiQSKhQKWFl+dDVgmJ5/dvjM/x8iVaGluxpaQ/Zy0FTxfRTaTPVl4+sTw0bexWRdQqlR04eBg6prBwKouqDVqdWc7SVHE193d0unpSToc3A7Eo9EFo4kN298sV34DxkxsQy63LyNJSlLbISA8XEK4nOeFBahWKnylUjns69cev3zxnD/zM/1t/QSEyu0RWnv2HgAAAABJRU5ErkJggg=="></a></td>';
             out += '</tr>';
 
             redTable.append(out);
