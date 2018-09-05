@@ -4,12 +4,12 @@ var useDocId, authHeader = "", redactions, corrections, language;
 function doWork() {
     try {
         setupRunInfo();
-        SetupEventHandlers();
         getRedactions();
         getIndexInfo();
         getRedactionSets();
         loadCaptionsStep();
         getAudioStep();
+        SetupEventHandlers();
         organizeDisplay();
     }
     catch (err) {
