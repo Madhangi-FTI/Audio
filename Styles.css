@@ -26,32 +26,31 @@ h1{
 
 body {
 	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
-	font-size: 13px;
+	font-size: 10px;
 	font-weight: normal;
 	overflow: hidden;
 }
 
-tr:nth-child(even) {
+#ccTable tr:nth-child(even) {
     background-color: #FFFFFF;
-    color: #0066FF;
+	color: #0066FF;
 }
 
-tr:nth-child(odd) {
+#ccTable tr:nth-child(odd) {
     background-color: #F1F1F1;
-    color: #0066FF;
+	color: #0066FF;
 }
+
 
 td {
-	font-family: Tahoma, Arial, Sans-Serif, Serif; 
-	font-size: 15px;
+	font-family: Segoe UI, Calibri, Lucida Grande, Lucida Sans, Arial, sans-serif;
+	font-size: 9px;
 	font-weight: normal;
     padding: 2px;
 }
 
 .cstar-content {
     overflow: auto;
-	height: 65%;
-	display: block;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -67,7 +66,10 @@ td {
 	height: 75px;
 }
 
-
+#transcript-content{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
 
 #status-content{
 	height: 100px;
