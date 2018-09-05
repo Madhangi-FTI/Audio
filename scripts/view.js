@@ -28,7 +28,6 @@ function formatTimeForDisplay(time) {
     return result;
 }
 
-
 Element.prototype.HiLiteTranscript = function ( locId) {
     curHiLiteId.removeClass( "hiLite");
     $(this).addClass("hiLite");
@@ -49,6 +48,7 @@ Element.prototype.HiLiteTranscript = function ( locId) {
     }
     return false;
 }
+
 function organizeDisplay() {
     $("#tabs-a").tabs();
     $("#tabs-b").tabs();
@@ -159,8 +159,6 @@ function renderCorrections(token, tokenLabel) {
     }
 }
 
-
-
 function renderRedactions_old() {
     try {
         var found = false;
@@ -208,7 +206,6 @@ function renderRedactionSets(redactionSets) {
         showRedactionError("Rendering Redaction Sets", err.message);
     }
 }
-
 
 function redactVerify() {
     if (selectStart != "" && selectEnd != "") {
@@ -275,7 +272,7 @@ function renderRedactions() {
             var e = formatTimeForDisplay(redaction.endTime);
             var r = redaction.redactionSet;
             var d = '<a href="#removeRedaction" id="Redact' + index + '" text-align="center">' +
-                    '<img alt="remove" src="images/trash.png"></a>';
+                    '<img alt="remove" src="https://raw.githubusercontent.com/Madhangi-FTI/Audio/master/images/trash.png"></a>';
             table.row.add([s, e, r, d]).draw();
         });
 
