@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ringtail Audio Solution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+    
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+	<link   rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://cdn.rawgit.com/shokai/jQuery.editable/master/jquery.editable.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<link rel="stylesheet" href="https://cstars.bbn.com/ringtail-audio/css/jplayer.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://rawgit.com/Madhangi-FTI/Audio/master/css/Styles.css">
+
+	<script type="text/javascript" src="https://rawgit.com/Madhangi-FTI/Audio/master/scripts/view.js"></script>
+	<script type="text/javascript" src="https://rawgit.com/Madhangi-FTI/Audio/master/scripts/model.js"></script>
+	<script type="text/javascript" src="https://rawgit.com/Madhangi-FTI/Audio/master/scripts/controller.js"></script>
+	<script>
+        var
+            bbnCaseUrl = "https://cstars.bbn.com/ringtail-audio/jrest/cstars/0.3-SNAPSHOT/",
+            bbnIndex = "%%INDEX%%",
+            bbnDocId = "%%BBNID%%",
+            bbnIsMono = %%ISMONO%%,
+            bbnCreds = 'cmluZ3RhaWw6cmluZ3RhaWw=';
+        $(document).ready(function () { doWork(); });
+    </script>
+</head>
+<body>
+    <h1>Document: <span id="docId"></span> <span id="totalTime"></span></h1>
+    <div id="content">
+        <div id="tabs-a">
+            <ul>
+                <li><a href="#tabs-status">status</a></li>
+                <li><a href="#tabs-audio">audio</a></li>
+                <li><a href="#tabs-redcation">redactions</a></li>
+                <li><a href="#tabs-correction">corrections</a></li>
+            </ul>
+            <div id="tabs-status">
+                <div id="status-content" style="width: 100%; overflow-y: scroll;">
+                </div>
+            </div>
+            <div id="tabs-audio">
+                <div id="player-content" class="cstar-content">
+                    <div id="jp_player" class="jp-jplayer"></div>
+                    <div id="jp_container_1" class="jp-audio">
+                        <!-- Main containers for player controls -->
+                        <div class="jp-gui">
+                            <div class="jp-interface">
+                                <div class="jp-controls-holder">
+                                    <!--play and pause buttons-->
+                                    <a href="javascript:;" class="jp-play" tabindex="1">play</a>
+                                    <a href="javascript:;" class="jp-pause" tabindex="1">pause</a>
+                                    <!-- <span class="separator sep-1"></span> -->
+                                    <!--progress bar-->
+                                    <div class="jp-progress">
+                                        <div class="jp-seek-bar">
+                                            <div class="jp-play-bar"><span></span></div>
+                                        </div>
+                                    </div>
+
+                                    <!--time notifications-->
+                                    <div class="jp-current-time"></div>
+                                    <span class="time-sep">/</span>
+                                    <div class="jp-duration"></div>
+                                    <span class="separator"></span>
+
+                                    <!--mute / unmute toggle-->
+                                    <a href="javascript:;" class="jp-mute" tabindex="1" title="mute"></a>
+                                    <a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute"></a>
+
+                                    <!--volume bar-->
+                                    <div class="jp-volume-bar">
+                                        <div class="jp-volume-bar-value"><span class="handle"></span></div>
+                                    </div>
+                                </div> <!--end jp-controls-holder-->
+                            </div> <!--end jp-interface-->
+                        </div> <!--end jp-gui-->
+                        <!--unsupported message-->
+                        <div class="jp-no-solution">
+                            <span>Update Required</span>
+                            This message which will appear if the audio isn't supported. A Flash alternative can be used here if you wish.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-redcation">
+                <div align="right">
+                    <div id="rsButtons">
+                        <button id="redactLast">Redact: XXX </button>
+                        <button id="selectRSet">Select an action</button>
+                    </div>
+                    <ul id="rsMenu">
+                        <li id="addNewRSet">Add New...</li>
+                        <li/>
+                    </ul>
+                </div>
+
+                <div id="redaction-content" class="cstar-content">
+                    <table class="dataTable" id="redTable">
+                        <thead>
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Redaction Set</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tabs-correction">
+                <div id="correction-content" class="cstar-content">
+                    <table id="fixTable">
+                        <tr>
+                            <td>Start Time</td>
+                            <td>End Time</td>
+                            <td>Duration</td>
+                            <td>Correction</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabs-b" background-color=green>
+            <ul>
+                <li><a href="#tabs-transcript">transcript</a></li>
+            </ul>
+            <div id="tabs-transcript">
+                <div id="transcript-content" class="cstar-content">
+                    <table id="ccTable"></table>
+                </div>
+            </div>
+        </div>
+	</div>
+</body>
+</html>
+
