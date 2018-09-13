@@ -1,6 +1,17 @@
 function getAjaxData(promise, funDesc, showAt, successFun, params) {
     showStatus(funDesc + " ...");
-    var runPromise = promise( params); //params == "" ? promise : promise( params);
+    var runPromise = promise( params); 
+    $.when(runPromise).then(function (data) {
+        showStatus("Success : " + funDesc);
+        successFun(data);
+    }).fail(function (err) {
+        handleError(err, funDesc, showAt);
+    });
+}
+
+function getAjaxData1(promise, funDesc, showAt, successFun) {
+    showStatus(funDesc + " ...");
+    var runPromise = promise;
     $.when(runPromise).then(function (data) {
         showStatus("Success : " + funDesc);
         successFun(data);
@@ -38,7 +49,6 @@ function addRedactionPromise(redaction) {
 }
 
 function getRedactionsPromise() {
-
     var url = window.bbnCaseUrl + 'documents/' + window.bbnIndex + "/" + window.useDocId + "/redactions";
 
     return $.ajax({
@@ -53,7 +63,6 @@ function getRedactionsPromise() {
 }
 
 function getRedactionSetsPromise() {
-
     var url = window.bbnCaseUrl + 'indexes/' + window.bbnIndex + "/redactionSets";
 
     return $.ajax({
@@ -68,7 +77,6 @@ function getRedactionSetsPromise() {
 }
 
 function addRedactionSetsPromise(newSet) {
-
     var url = window.bbnCaseUrl + 'indexes/' + window.bbnIndex + "/redactionSets";
 
     return $.ajax({
@@ -84,7 +92,6 @@ function addRedactionSetsPromise(newSet) {
 }
 
 function delRedactionPromise(redaction) {
-
     var url = window.bbnCaseUrl + 'documents/' + window.bbnIndex + "/" + window.useDocId + "/redactions";
 
     return $.ajax({
@@ -99,7 +106,6 @@ function delRedactionPromise(redaction) {
 }
 
 function getCaptionsPromise( side) {
-
     var url = window.bbnCaseUrl + 'transcripts/' + window.bbnIndex + "/" + window.bbnDocId + (side == "" ? "" : "-" + side);
 
     return $.ajax({
@@ -115,12 +121,10 @@ function getCaptionsPromise( side) {
 }
 
 function getAudioUrl() {
-
     return window.bbnCaseUrl + 'audio/' + window.bbnIndex + "/" + window.useDocId;
 }
 
 function getIndexInfoPromise() {
-
     var url = window.bbnCaseUrl + 'indexes/' + window.bbnIndex;
 
     return $.ajax({
@@ -135,7 +139,6 @@ function getIndexInfoPromise() {
 }
 
 function correctTranscriptPromise( correction) {
-
     var url = window.bbnCaseUrl + 'transcripts/' + window.bbnIndex + "/" + window.useDocId +
         '/correction?language=' + window.language;
 
