@@ -31,8 +31,7 @@ function organizeDisplayStep() {
 
 function getIndexInfo() {
     getAjaxData(getIndexInfoPromise, "Gather info about the index", "",
-        function (data) { window.language = data.sourceTypes[0].replace("-TOK", ""); }
-    );
+        function (data) { window.language = data.sourceTypes[0].replace("-TOK", ""); });
 }
 
 // ---------------------------------   Initialize --------------------------------- 
@@ -88,15 +87,12 @@ function formatMonoCaption(capA) {
 
 function loadCaptionsStep() {
     if (window.bbnIsMono) {
-        getAjaxData(getCaptionsPromise(""), "Gather single sided transcripts", "",
-            function (data) { formatCaptionsStep(data); },
-            ""
-        );
+        getAjaxData1(getCaptionsPromise(""), "Gather single sided transcripts", "",
+            function (data) { formatCaptionsStep(data); });
     }
     else {
         getAjaxData2(getCaptionsPromise, "Gather multi sided transcripts", "",
-            function (data1, data2) { formatCaptionsStep(data1, data2); }
-        );
+            function (data1, data2) { formatCaptionsStep(data1, data2); });
     }
 }
 
@@ -126,15 +122,13 @@ function getRedactions() {
 function addRedaction(redactionSet, startTime, endTime) {
     getAjaxData(addRedactionPromise, "Add redaction", "alert",
         function (data) { alert(data.message); location.reload(); },
-        { startTime: startTime, endTime: endTime, redactionSet: redactionSet }
-    );
+        { startTime: startTime, endTime: endTime, redactionSet: redactionSet });
 }
 
 function removeRedaction(redaction) {
     getAjaxData(delRedactionPromise, "Remove redaction", "alert",
         function (data) { alert(data.message); location.reload(); },
-        redaction
-    );
+        redaction);
 }
 
 function isRedacted(token) {
@@ -177,15 +171,13 @@ function addRedactionSet() {
     else {
         getAjaxData(addRedactionSetsPromise, "Add redaction set", "alert",
             function (data) { alert(data.message); location.reload(); },
-            newSet
-        );
+            newSet);
     }
 }
 
 function getRedactionSets() {
     getAjaxData(getRedactionSetsPromise, "Gather redaction sets for this case", "",
-        function (data) { renderRedactionSets(data); }
-    );
+        function (data) { renderRedactionSets(data); });
 }
 
 // ---------------------------------   REDACTION SETS --------------------------------- 
